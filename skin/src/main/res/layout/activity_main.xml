@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    skin:enable="true">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        skin:enable="true"
+        android:src="@drawable/alarm" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        skin:enable="true"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"/>
+
+    <Button
+        skin:enable="true"
+        android:id="@+id/btn_switch"
+        android:text="日间/夜间模式切换"
+        android:textColor="@color/black"
+        android:background="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
