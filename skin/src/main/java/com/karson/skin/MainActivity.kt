@@ -17,4 +17,5 @@ class MainActivity : BaseSkinActivity() {
             }, 500)
         }
     }
+
 }

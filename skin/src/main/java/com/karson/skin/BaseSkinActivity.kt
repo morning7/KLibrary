@@ -14,7 +14,6 @@ open class BaseSkinActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         skinInflaterFactory = SkinInflaterFactory()
         layoutInflater.factory = skinInflaterFactory
-        onThemeUpdate()
     }
 
     fun onThemeUpdate() {
