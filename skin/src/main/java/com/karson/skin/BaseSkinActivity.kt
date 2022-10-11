@@ -1,19 +1,19 @@
 package com.karson.skin
 
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.karson.skin.resolver.SkinInflaterFactory
 
 /**
  * 继承AppCompatActivity会报错：A factory has already been set on this LayoutInflater
  */
-open class BaseSkinActivity : FragmentActivity() {
+open class BaseSkinActivity : AppCompatActivity() {
     private lateinit var skinInflaterFactory: SkinInflaterFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         skinInflaterFactory = SkinInflaterFactory()
-        layoutInflater.factory = skinInflaterFactory
+        layoutInflater.factory2 = skinInflaterFactory
+        super.onCreate(savedInstanceState)
     }
 
     fun onThemeUpdate() {

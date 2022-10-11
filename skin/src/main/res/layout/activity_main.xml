@@ -14,7 +14,7 @@
         skin:enable="true"
         android:src="@drawable/alarm" />
 
-    <com.karson.skin.MyTextView
+    <TextView
         android:id="@+id/tv_content"
         skin:enable="true"
         android:textColor="@color/black"

@@ -10,10 +10,15 @@ import java.lang.ref.WeakReference
 
 private const val TAG = "SkinInflaterFactory"
 
-class SkinInflaterFactory : LayoutInflater.Factory {
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+class SkinInflaterFactory : LayoutInflater.Factory2 {
+
+    override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
+        if (!skinEnable(attrs)) {
+            return null
+        }
+
         var view: View?
-//        Log.i(TAG, name)
+        Log.i(TAG, name)
         try {
             if (-1 == name.indexOf(".")) {
                 /**
@@ -40,6 +45,14 @@ class SkinInflaterFactory : LayoutInflater.Factory {
         return view
     }
 
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+       return null
+    }
+
+    private fun skinEnable(attrs: AttributeSet): Boolean {
+        return attrs.getAttributeBooleanValue(SkinConfig.NAME_SPACE, SkinConfig.ATTR_SKIN_ENABLE, false)
+    }
+
     /**
      * background:@2131034200
      * src:@2131492864
@@ -62,9 +75,6 @@ class SkinInflaterFactory : LayoutInflater.Factory {
      * 8.为页面上的元素集重新设置资源
      */
     private fun parseSkinAttr(attrs: AttributeSet, context: Context, view: View) {
-        if (!skinEnable(attrs)) {
-            return
-        }
         for (i in 0 until attrs.attributeCount) {
             val attrName = attrs.getAttributeName(i)
             val attrValue = attrs.getAttributeValue(i)
@@ -75,6 +85,9 @@ class SkinInflaterFactory : LayoutInflater.Factory {
 //                    val entryName = context.resources.getResourceEntryName(id)
 //                    val typeName = context.resources.getResourceTypeName(id)
 //                    Log.i(TAG, "$entryName:$typeName")
+                    /**
+                     * 标记需要换肤的view和对应的属性
+                     */
                     val skinAttr = SkinAttr(attrName, WeakReference(view))
                     skinAttrs.add(skinAttr)
                 } catch (e: Exception) {
@@ -83,10 +96,6 @@ class SkinInflaterFactory : LayoutInflater.Factory {
                 }
             }
         }
-    }
-
-    private fun skinEnable(attrs: AttributeSet): Boolean {
-        return attrs.getAttributeBooleanValue(SkinConstant.NAME_SPACE, SkinConstant.ATTR, false)
     }
 
     fun apply() {
