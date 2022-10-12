@@ -25,7 +25,7 @@ class SkinAttr(private val attrName: String, private val view: WeakReference<Vie
             }
             "src" -> {
                 if (view is ImageView) {
-                    view.setImageResource(R.drawable.alarm_dark)
+//                    view.setImageResource(R.drawable.alarm_dark)
                 }
             }
 
