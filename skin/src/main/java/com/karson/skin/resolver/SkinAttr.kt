@@ -15,6 +15,9 @@ class SkinAttr(private val attrName: String, private val view: WeakReference<Vie
             "background" -> {
                 view.setBackgroundColor(ContextCompat.getColor(view.context, android.R.color.black))
             }
+            "kbackground" -> {
+                view.setBackgroundColor(ContextCompat.getColor(view.context, android.R.color.white))
+            }
             "textColor" -> {
                 if (view is TextView) {
                     view.setTextColor(ContextCompat.getColor(view.context, android.R.color.white))
@@ -25,6 +28,7 @@ class SkinAttr(private val attrName: String, private val view: WeakReference<Vie
                     view.setImageResource(R.drawable.alarm_dark)
                 }
             }
+
         }
     }
 

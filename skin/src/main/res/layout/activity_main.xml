@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:skin="http://schemas.android.com/android/skin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white"
     android:layout_width="match_parent"
@@ -13,6 +14,12 @@
         android:layout_height="60dp"
         skin:enable="true"
         android:src="@drawable/alarm" />
+
+    <com.karson.widget.KImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:kbackground="@color/black"
+        skin:enable="true" />
 
     <TextView
         android:id="@+id/tv_content"
