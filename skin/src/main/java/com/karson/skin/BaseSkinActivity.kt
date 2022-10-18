@@ -7,16 +7,17 @@ import com.karson.skin.resolver.SkinInflaterFactory
 /**
  * 继承AppCompatActivity会报错：A factory has already been set on this LayoutInflater
  */
-open class BaseSkinActivity : AppCompatActivity() {
+open class BaseSkinActivity : AppCompatActivity(), SkinManager.Callback {
     private lateinit var skinInflaterFactory: SkinInflaterFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         skinInflaterFactory = SkinInflaterFactory()
         layoutInflater.factory2 = skinInflaterFactory
         super.onCreate(savedInstanceState)
+        SkinManager.setObserver(this)
     }
 
-    fun onThemeUpdate() {
+    override fun onThemeUpdate() {
         skinInflaterFactory.apply()
     }
 }

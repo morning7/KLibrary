@@ -81,14 +81,14 @@ class SkinInflaterFactory : LayoutInflater.Factory2 {
             Log.i(TAG, "$attrName:$attrValue")
             if (attrValue.startsWith("@")) {
                 try {
-//                    val id = Integer.parseInt(attrValue.substring(1))
-//                    val entryName = context.resources.getResourceEntryName(id)
-//                    val typeName = context.resources.getResourceTypeName(id)
-//                    Log.i(TAG, "$entryName:$typeName")
+                    val id = Integer.parseInt(attrValue.substring(1))
+                    val entryName = context.resources.getResourceEntryName(id)
+                    val typeName = context.resources.getResourceTypeName(id)
+                    Log.i(TAG, "$entryName:$typeName")
                     /**
                      * 标记需要换肤的view和对应的属性
                      */
-                    val skinAttr = SkinAttr(attrName, WeakReference(view))
+                    val skinAttr = SkinAttr(attrName, WeakReference(view), id, entryName, typeName)
                     skinAttrs.add(skinAttr)
                 } catch (e: Exception) {
                     //NumberFormatException,NotFoundException

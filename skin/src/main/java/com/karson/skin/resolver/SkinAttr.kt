@@ -5,9 +5,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.karson.skin.R
+import com.karson.skin.SkinManager
 import java.lang.ref.WeakReference
 
-class SkinAttr(private val attrName: String, private val view: WeakReference<View>) {
+class SkinAttr(
+    private val attrName: String,
+    private val view: WeakReference<View>,
+    private val id: Int,
+    private val entryName: String,
+    private val typeName: String) {
 
     fun apply() {
         val view = view.get() ?: return
@@ -26,6 +32,7 @@ class SkinAttr(private val attrName: String, private val view: WeakReference<Vie
             "src" -> {
                 if (view is ImageView) {
 //                    view.setImageResource(R.drawable.alarm_dark)
+                    view.setImageDrawable(SkinManager.getDrawable(id))
                 }
             }
 
