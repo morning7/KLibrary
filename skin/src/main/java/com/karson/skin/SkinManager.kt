@@ -15,14 +15,17 @@ object SkinManager {
     private lateinit var app: Application
     private lateinit var skinFileName: String
     private lateinit var skinRes: Resources
-    private var callback: Callback? = null
+    private var skinObservers = mutableListOf<ISkinUpdate>()
+    private var skinPath = ""
 
-    interface Callback {
-        fun onThemeUpdate()
+    fun attach(observer: ISkinUpdate) {
+        if (!skinObservers.contains(observer)) {
+            skinObservers.add(observer)
+        }
     }
 
-    fun setObserver(callback: Callback) {
-        this.callback = callback
+    fun detach(observer: ISkinUpdate) {
+        skinObservers.remove(observer)
     }
 
     /**
@@ -36,7 +39,8 @@ object SkinManager {
         app = application
         this.skinFileName = skinFileName
         copySkinFile(skinFileName) { skinPath ->
-            load(skinPath)
+            this.skinPath = skinPath
+//            load(skinPath)
         }
     }
 
@@ -65,15 +69,22 @@ object SkinManager {
     }
 
     //反射AssetManager调用addAssetPath，加载皮肤包，生成皮肤Resources。
-    private fun load(skinPackagePath: String) {
+    fun load() {
         Thread {
             val assetManager = AssetManager::class.java.newInstance()
             val addAssetPath = assetManager.javaClass.getMethod("addAssetPath", String::class.java)
-            addAssetPath.invoke(assetManager, skinPackagePath)
+            addAssetPath.invoke(assetManager, skinPath)
             //5.获取应用资源类
             val superRes = app.resources
             skinRes = Resources(assetManager, superRes.displayMetrics, superRes.configuration)
+            notifyThemeUpdate()
         }.start()
+    }
+
+    private fun notifyThemeUpdate() {
+        for (i in 0 until skinObservers.size) {
+            skinObservers[i].onThemeUpdate()
+        }
     }
 
     //4.通过宿主资源ID获取资源名、资源类别，皮肤Resources调用getIdentifier获取插件资源ID，获取对应的资源文件。

@@ -22,6 +22,11 @@ class MainActivity : BaseSkinActivity() {
                 onThemeUpdate()
             }, 500)
         }
+
+
+        binding.btnSwitch.postDelayed({
+            SkinManager.load()
+        }, 500)
     }
 
 }
