@@ -5,11 +5,18 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import com.karson.skin.attr.AttrsFactory
 import java.lang.Exception
 import java.lang.ref.WeakReference
 
 private const val TAG = "SkinInflaterFactory"
 
+/**
+ * 1.检查皮肤开关已启用。
+ * 2.遍历布局，生成View。
+ * 3.解析View属性集，若资源为@开头，获取资源ID、资源名、资源类型，工厂类生成对应属性类。
+ * 4.若皮肤属性不为空且皮肤已加载，SkinItem遍历属性实现换肤。
+ */
 class SkinInflaterFactory : LayoutInflater.Factory2 {
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
@@ -38,7 +45,7 @@ class SkinInflaterFactory : LayoutInflater.Factory2 {
                  */
                 view = LayoutInflater.from(context).createView(name, null, attrs)
             }
-            parseSkinAttr(attrs, context, view)
+            parseSkinAttr(context, attrs, view)
         } catch (e: ClassNotFoundException) {
             view = null
         }
@@ -58,8 +65,7 @@ class SkinInflaterFactory : LayoutInflater.Factory2 {
      * src:@2131492864
      * textColor:@2131034145
      */
-
-    private val skinAttrs: ArrayList<SkinAttr> by lazy {
+    private val skinItemList: ArrayList<SkinItem> by lazy {
         ArrayList()
     }
 
@@ -74,7 +80,8 @@ class SkinInflaterFactory : LayoutInflater.Factory2 {
      * 7.判断是否有background,src,textColor等颜色或图标相关属性
      * 8.为页面上的元素集重新设置资源
      */
-    private fun parseSkinAttr(attrs: AttributeSet, context: Context, view: View) {
+    private fun parseSkinAttr(context: Context, attrs: AttributeSet, view: View) {
+        val skinAttrList = ArrayList<SkinAttr>()
         for (i in 0 until attrs.attributeCount) {
             val attrName = attrs.getAttributeName(i)
             val attrValue = attrs.getAttributeValue(i)
@@ -88,19 +95,29 @@ class SkinInflaterFactory : LayoutInflater.Factory2 {
                     /**
                      * 标记需要换肤的view和对应的属性
                      */
-                    val skinAttr = SkinAttr(attrName, WeakReference(view), id, entryName, typeName)
-                    skinAttrs.add(skinAttr)
+                    val skinAttr = AttrsFactory.create(id, attrName, entryName, typeName)
+                    skinAttr?.let {
+                        skinAttrList.add(skinAttr)
+                    }
                 } catch (e: Exception) {
                     //NumberFormatException,NotFoundException
                     e.printStackTrace()
                 }
             }
         }
+
+        if (skinAttrList.isNotEmpty()) {
+            val skinItem = SkinItem(skinAttrList, WeakReference(view))
+            skinItemList.add(skinItem)
+            skinItem.apply()
+        }
     }
 
     fun apply() {
-        for (i in 0 until skinAttrs.size) {
-            skinAttrs[i].apply()
+        val iterator = skinItemList.iterator()
+        while (iterator.hasNext()) {
+            val skinItem = iterator.next()
+            skinItem.apply()
         }
     }
 }

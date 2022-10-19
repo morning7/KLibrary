@@ -1,10 +1,10 @@
-package com.karson.skin
+package com.karson.skin.manager
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.res.AssetManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import com.karson.skin.ISkinUpdate
 import java.io.File
 import java.lang.Exception
 
@@ -37,10 +37,10 @@ object SkinManager {
     //1.初始化Context
     fun init(application: Application, skinFileName: String) {
         app = application
-        this.skinFileName = skinFileName
+        SkinManager.skinFileName = skinFileName
         copySkinFile(skinFileName) { skinPath ->
-            this.skinPath = skinPath
-//            load(skinPath)
+            SkinManager.skinPath = skinPath
+            load()
         }
     }
 
@@ -69,7 +69,7 @@ object SkinManager {
     }
 
     //反射AssetManager调用addAssetPath，加载皮肤包，生成皮肤Resources。
-    fun load() {
+    private fun load() {
         Thread {
             val assetManager = AssetManager::class.java.newInstance()
             val addAssetPath = assetManager.javaClass.getMethod("addAssetPath", String::class.java)
@@ -88,11 +88,22 @@ object SkinManager {
     }
 
     //4.通过宿主资源ID获取资源名、资源类别，皮肤Resources调用getIdentifier获取插件资源ID，获取对应的资源文件。
-    @SuppressLint("UseCompatLoadingForDrawables")
     fun getDrawable(resId: Int): Drawable {
         val entryName = app.resources.getResourceEntryName(resId)
         val typeName = app.resources.getResourceTypeName(resId)
         val skinResId = skinRes.getIdentifier(entryName, typeName, SKIN_PACKAGE_NAME)
-        return skinRes.getDrawable(skinResId, null)
+        return skinRes.getDrawable(skinResId)
+    }
+
+    fun getColor(resId: Int): Int {
+        val entryName = app.resources.getResourceEntryName(resId)
+        val typeName = app.resources.getResourceTypeName(resId)
+        val skinResId = skinRes.getIdentifier(entryName, typeName, SKIN_PACKAGE_NAME)
+        return if (skinResId != 0) {
+            skinRes.getColor(skinResId)
+        } else {
+            app.resources.getColor(resId)
+        }
+
     }
 }

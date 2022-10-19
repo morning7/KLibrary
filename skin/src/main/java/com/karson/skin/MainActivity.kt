@@ -17,16 +17,11 @@ class MainActivity : BaseSkinActivity() {
          * 2.点击换肤遍历元素
          * 3.自定义控件和属性
          */
-        binding.btnSwitch.setOnClickListener {
-            binding.btnSwitch.postDelayed({
-                onThemeUpdate()
-            }, 500)
-        }
-
-
-        binding.btnSwitch.postDelayed({
-            SkinManager.load()
-        }, 500)
+//        binding.btnSwitch.setOnClickListener {
+//            binding.btnSwitch.postDelayed({
+//                onThemeUpdate()
+//            }, 500)
+//        }
     }
 
 }

@@ -2,6 +2,7 @@ package com.karson.skin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.karson.skin.manager.SkinManager
 import com.karson.skin.resolver.SkinInflaterFactory
 
 /**

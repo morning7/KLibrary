@@ -4,7 +4,7 @@
     xmlns:skin="http://schemas.android.com/android/skin"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/background_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     skin:enable="true">
@@ -18,13 +18,13 @@
     <com.karson.widget.KImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        app:kbackground="@color/black"
+        app:kbackground="@color/primary_color"
         skin:enable="true" />
 
     <TextView
         android:id="@+id/tv_content"
         skin:enable="true"
-        android:textColor="@color/black"
+        android:textColor="@color/primary_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"/>
@@ -33,8 +33,8 @@
         skin:enable="true"
         android:id="@+id/btn_switch"
         android:text="日间/夜间模式切换"
-        android:textColor="@color/black"
-        android:background="@color/white"
+        android:textColor="@color/primary_color"
+        android:background="@color/background_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>

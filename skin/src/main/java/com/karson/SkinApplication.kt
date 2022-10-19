@@ -1,7 +1,7 @@
 package com.karson
 
 import android.app.Application
-import com.karson.skin.SkinManager
+import com.karson.skin.manager.SkinManager
 
 class SkinApplication : Application() {
 
