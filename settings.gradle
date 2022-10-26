@@ -10,3 +10,4 @@ rootProject.name = "KLibrary"
 include ':app'
 include ':skin'
 include ':darkskin'
+include ':language'
