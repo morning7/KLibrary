@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/darkskin" />
             <option value="$PROJECT_DIR$/language" />
+            <option value="$PROJECT_DIR$/router" />
             <option value="$PROJECT_DIR$/skin" />
           </set>
         </option>
