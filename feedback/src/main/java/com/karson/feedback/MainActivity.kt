@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.karson.feedback.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.karson.feedback.databinding.ActivityMainBinding
 import okhttp3.*
 import java.io.IOException
 
