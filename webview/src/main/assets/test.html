@@ -1,0 +1,97 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+
+    function jsAlert(){
+        var r = alert("我是Alert的提示框");
+        document.getElementById("p").innerHTML="Java成功调的JS的alert方法";
+    }
+
+    function jsConFirm(){
+      var r = confirm("我是ConFirm的弹出框");
+      if (r == true)
+      {
+        document.getElementById("p").innerHTML="用户点击了确认按钮";
+      }else{
+        document.getElementById("p").innerHTML="用户点击了取消按钮";
+      }
+    }
+    function jsPrompt(){
+        //第一个参数是提示
+        //第二个参数是默认值
+        var r = prompt("请输入姓名：","小明同学");
+        if (r != null)
+        {
+         document.getElementById("p").innerHTML="用户输入的姓名为："+r;
+        }else{
+         document.getElementById("p").innerHTML="用户点击了取消按钮";
+        }
+
+    }
+    function jsJava(){
+        //调用java的方法，顶级对象，java方法
+        //可以直接访问JSTest，这是因为JSTest挂载到js的window对象下了
+        JSTest.showToast("我是被JS执行的Android代码");
+    }
+
+    function sum(a,b){
+    return a+b;
+    }
+
+    function showInfoFromJava(){
+        var mes = myObj.getAndroidResult();
+        <!--Toast(mes,3000);-->
+        alert(mes);
+
+    }
+
+    <!--自定义弹框 --> 
+    function Toast(msg,duration){  
+    duration=isNaN(duration)?3000:duration;  
+    var m = document.createElement('div');  
+    m.innerHTML = msg;  
+    m.style.cssText="width:60%; min-width:150px; background:#000; opacity:0.5; height:40px; color:#fff; line-height:40px; text-align:center; border-radius:5px; position:fixed; top:40%; left:20%; z-index:999999; font-weight:bold;";  
+    document.body.appendChild(m);  
+    setTimeout(function() {  
+        var d = 0.5;  
+        m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';  
+        m.style.opacity = '0';  
+        setTimeout(function() { document.body.removeChild(m) }, d * 1000);  
+    }, duration);  
+    }  
+
+    </script>
+
+  <style type="text/css">
+        .innerdiv{
+            width:360px;
+            height: 120px;
+            margin:0 auto;
+            text-align: center
+            font-size: 30px
+        }
+    </style>
+</head>
+<body>
+
+<div style="text-align: center">
+  <div class="title"><h3 id="p">演示程序H5版</h3></div>
+  <div class="innerdiv">
+    <input type="button" value="开启Alert提示框" onclick="jsAlert()"/>
+  </div>
+  <div class="innerdiv">
+    <input type="button" value="开启ConFirm弹窗" onclick="jsConFirm()"/>
+  </div>
+  <div class="innerdiv">
+    <input type="button" value="开启Prompt弹窗" onclick="jsPrompt()"/>
+  </div>
+  <div class="innerdiv">
+    <input type="button" value="调用Java方法" onclick="jsJava()"/>
+  </div>
+
+</div>
+
+</body>
+</html>

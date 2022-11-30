@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/language" />
             <option value="$PROJECT_DIR$/router" />
             <option value="$PROJECT_DIR$/skin" />
+            <option value="$PROJECT_DIR$/webview" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -24,6 +24,8 @@
         <entry key="skin/src/main/res/drawable/ic_launcher_background.xml" value="0.2712962962962963" />
         <entry key="skin/src/main/res/layout/activity_main.xml" value="0.2947916666666667" />
         <entry key="skin/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2712962962962963" />
+        <entry key="webview/src/main/res/layout/activity_main.xml" value="0.287962962962963" />
+        <entry key="webview/src/main/res/layout/activity_webview.xml" value="0.40106951871657753" />
       </map>
     </option>
   </component>
