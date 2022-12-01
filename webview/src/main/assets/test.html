@@ -33,7 +33,7 @@
     function jsJava(){
         //调用java的方法，顶级对象，java方法
         //可以直接访问JSTest，这是因为JSTest挂载到js的window对象下了
-        JSTest.showToast("我是被JS执行的Android代码");
+        android.toast("我是被JS执行的Android代码");
     }
 
     function sum(a,b){
@@ -41,10 +41,15 @@
     }
 
     function showInfoFromJava(){
-        var mes = myObj.getAndroidResult();
-        <!--Toast(mes,3000);-->
-        alert(mes);
+        var mes = android.getAndroidResult();
+        Toast(mes,500);
+<!--        alert(mes);-->
 
+    }
+
+    function callAndroid() {
+        document.location = "js://webview?arg1=111&arg2=222"
+<!--        document.location = "https://www.baidu.com"-->
     }
 
     <!--自定义弹框 --> 
@@ -89,6 +94,12 @@
   </div>
   <div class="innerdiv">
     <input type="button" value="调用Java方法" onclick="jsJava()"/>
+  </div>
+  <div class="innerdiv">
+    <input type="button" value="调用Android方法" onclick="callAndroid()"/>
+  </div>
+  <div class="innerdiv">
+    <input type="button" value="获取Android返回值" onclick="showInfoFromJava()"/>
   </div>
 
 </div>
