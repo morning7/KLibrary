@@ -147,9 +147,13 @@ class WebViewActivity : AppCompatActivity() {
                 super.onPageStarted(view, url, favicon)
             }
 
-            override fun onPageFinished(view: WebView?, url: String?) {
+            override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
-                //调用js方法需要加载完毕
+                /**
+                 * 调用js方法需要加载完毕
+                 * android调用JS方法获取HTML标签等源码
+                 */
+                view.loadUrl("javascript:window.android.log(document.getElementsByTagName('html')[0].innerHTML);")
             }
 
             override fun shouldOverrideUrlLoading(
@@ -164,6 +168,14 @@ class WebViewActivity : AppCompatActivity() {
                     return true
                 }
                 return super.shouldOverrideUrlLoading(view, request)
+            }
+
+            /**
+             * 兼容低版本
+             */
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                view.loadUrl(url)
+                return true
             }
         }
     }
