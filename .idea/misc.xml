@@ -14,6 +14,9 @@
         <entry key="feedback/src/main/res/drawable/ic_launcher_background.xml" value="0.5276923076923077" />
         <entry key="feedback/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="feedback/src/main/res/layout/item_comment.xml" value="0.5197916666666667" />
+        <entry key="feedback/src/main/res/layout/item_empty.xml" value="0.45" />
+        <entry key="feedback/src/main/res/layout/item_error.xml" value="0.5197916666666667" />
+        <entry key="feedback/src/main/res/layout/item_loading.xml" value="0.375" />
         <entry key="feedback/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.5276923076923077" />
         <entry key="language/src/main/res/layout/activity_main.xml" value="0.5197916666666667" />
         <entry key="router/src/main/res/layout/activity_main.xml" value="0.5197916666666667" />

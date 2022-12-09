@@ -1,8 +1,11 @@
 package com.karson.feedback
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karson.feedback.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -21,8 +24,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initData()
-        initView()
+        commentAdapter = CommentAdapter()
+        binding.rvComment.layoutManager = LinearLayoutManager(this)
+        binding.rvComment.adapter = commentAdapter
+        commentAdapter.setCallback(object : BaseCommonAdapter.Callback<CommentInfo> {
+            override fun onItemClick(item: CommentInfo) {
+                Toast.makeText(this@MainActivity, item.creator_name, Toast.LENGTH_SHORT).show()
+//                Log.e(TAG, item.creator_name)
+            }
+        })
+
+        binding.root.postDelayed({
+            initData()
+            initView()
+        }, 1000)
     }
 
     private fun initView() {
@@ -31,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.refreshLayout.setOnLoadMoreListener {
-            initData(mPage++)
+            initData(++mPage)
         }
     }
 
@@ -42,10 +57,15 @@ class MainActivity : AppCompatActivity() {
             .url(commentUrl)
             .build()
         client.newCall(request).enqueue(object : Callback {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onFailure(call: Call, e: IOException) {
-                binding.refreshLayout.finishRefresh()
-                binding.refreshLayout.finishLoadMore()
-                mPage -= 1
+                runOnUiThread {
+                    commentAdapter.setState(BaseCommonAdapter.State.ERROR)
+                    commentAdapter.notifyDataSetChanged()
+                    binding.refreshLayout.finishRefresh()
+                    binding.refreshLayout.finishLoadMore()
+                    mPage -= 1
+                }
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -62,23 +82,17 @@ class MainActivity : AppCompatActivity() {
                             iterator.remove()
                         }
                     }
-                    initAdapter(commentList, page == 1)
+                    initAdapter(commentList)
                 }
             }
 
         })
     }
 
-    private fun initAdapter(commentList: List<CommentInfo>, firstPage: Boolean) {
+    private fun initAdapter(commentList: List<CommentInfo>) {
         runOnUiThread {
-            if (firstPage) {
-                binding.rvComment.layoutManager = LinearLayoutManager(this)
-                commentAdapter = CommentAdapter(commentList)
-                binding.rvComment.adapter = commentAdapter
-            } else {
-                commentAdapter.addData(commentList)
-                commentAdapter.notifyDataSetChanged()
-            }
+            commentAdapter.addData(commentList)
+            commentAdapter.setState(BaseCommonAdapter.State.SUCCESS)
         }
     }
 }

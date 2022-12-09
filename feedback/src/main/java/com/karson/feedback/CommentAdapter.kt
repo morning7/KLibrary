@@ -7,24 +7,19 @@ import com.karson.feedback.databinding.ItemCommentBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CommentAdapter(commentList: List<CommentInfo>) : RecyclerView.Adapter<CommentAdapter.CommentHolder>() {
-    private var data = commentList.toMutableList()
+class CommentAdapter : BaseCommonAdapter<CommentAdapter.CommentHolder, CommentInfo>() {
 
-    fun addData(commentList: List<CommentInfo>) {
-        data.addAll(commentList)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): BaseViewHolder {
         return CommentHolder(ItemCommentBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: CommentHolder, position: Int) {
-        holder.bind(data[position])
+    override fun bindHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is CommentHolder) {
+            holder.bind(getData()[position])
+        }
     }
 
-    override fun getItemCount() = data.size
-
-    inner class CommentHolder(private val itemBinding: ItemCommentBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    inner class CommentHolder(private val itemBinding: ItemCommentBinding) :BaseViewHolder(itemBinding.root) {
 
         fun bind(commentInfo: CommentInfo) {
             itemBinding.tvContent.text = commentInfo.content
@@ -36,5 +31,6 @@ class CommentAdapter(commentList: List<CommentInfo>) : RecyclerView.Adapter<Comm
             itemBinding.tvDate.text = date
         }
     }
+
 }
 
