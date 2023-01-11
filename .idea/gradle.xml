@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/feedback" />
             <option value="$PROJECT_DIR$/language" />
             <option value="$PROJECT_DIR$/router" />
+            <option value="$PROJECT_DIR$/rxjava" />
             <option value="$PROJECT_DIR$/skin" />
             <option value="$PROJECT_DIR$/webview" />
           </set>

@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.5197916666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/activity_rxjava.xml" value="0.5197916666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.32447916666666665" />
         <entry key="darkskin/src/main/res/drawable/alarm.xml" value="0.3296875" />
         <entry key="darkskin/src/main/res/layout/activity_main.xml" value="0.3" />
@@ -19,9 +20,12 @@
         <entry key="feedback/src/main/res/layout/item_loading.xml" value="0.375" />
         <entry key="feedback/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.5276923076923077" />
         <entry key="language/src/main/res/layout/activity_main.xml" value="0.5197916666666667" />
+        <entry key="nfc/src/main/res/layout/activity_main.xml" value="0.3145833333333333" />
+        <entry key="nfc/src/main/res/xml/nfc_tech.xml" value="0.5197916666666667" />
         <entry key="router/src/main/res/layout/activity_main.xml" value="0.5197916666666667" />
         <entry key="router/src/main/res/layout/activity_second.xml" value="0.5197916666666667" />
         <entry key="router/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.5359375" />
+        <entry key="rxjava/src/main/res/layout/activity_main.xml" value="0.50625" />
         <entry key="skin/src/main/res/drawable-anydpi/alarm.xml" value="0.5359375" />
         <entry key="skin/src/main/res/drawable-anydpi/alarm_dark.xml" value="0.5359375" />
         <entry key="skin/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2712962962962963" />
