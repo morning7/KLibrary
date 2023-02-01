@@ -10,6 +10,8 @@ import io.reactivex.Observer
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Function
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +26,69 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btn.setOnClickListener {
-            create()
+            function()
         }
+    }
+
+    /**
+     * 功能操作符
+     */
+    private fun function() {
+        //delay
+
+        /**
+         * 周期函数
+         */
+        Observable.just(1, 2, 3)
+            .doOnNext {
+                print("doOnNext")
+            }
+            .doFinally {
+                print("doFinally")
+            }
+            .subscribe {
+                print(it.toString())
+            }.addTo(composite)
+
+        //subscribeOn(): 指定被观察者的线程，如果多次调用此方法，只有第一次有效。
+        //observeOn(): 指定观察者的线程
+    }
+
+    /**
+     * 组合操作符
+     */
+    private fun combine() {
+        /**
+         * zip操作符用于将多个数据源合并，并生成一个新的数据源。
+         * 新生成的数据源严格按照合并前的数据源的数据发射顺序，
+         * 并且新数据源的数据个数等于合并前发射数据个数最少的那个数据源的数据个数。
+         */
+        val intObservable = Observable.just(1, 2, 3)
+        val stringObservable = Observable.just("A", "B")
+        Observable.zip(intObservable, stringObservable,
+            { t1, t2 ->
+                t1.toString() + t2
+            }).subscribe { t ->
+                print(t)
+        }.addTo(composite)
+
+//        Observable.concat(Observable.just(1), Observable.just("2")).subscribe {
+//            print(it.toString())
+//        }.addTo(composite)
+
+//        intObservable.count().subscribe { count ->
+//            print(count.toString())
+//        }.addTo(composite)
+    }
+
+
+    /**
+     * 转换操作符
+     */
+    private fun transform() {
+        //map 转换数据
+        //flatmap 转换被观察者（并行）
+        //contactMap 转换被观察者（顺序）
     }
 
     /**
