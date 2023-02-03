@@ -28,7 +28,7 @@ class FlowActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.btn.setOnClickListener {
             lifecycleScope.launch {
-                //collect：相当于把水龙头接到水管上并打开
+                //collect：相当于把水龙头接到水管上并打开 Observable.subscribe
                 mainViewModel.timeFlow.collect { time ->
                     binding.tvTime.text = time.toString()
                 }
@@ -39,5 +39,6 @@ class FlowActivity : AppCompatActivity() {
 //                }
             }
         }
+
     }
 }
