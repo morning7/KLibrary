@@ -1,9 +1,12 @@
 package com.karson.flow
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.karson.flow.databinding.ActivityFlowBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -27,18 +30,38 @@ class FlowActivity : AppCompatActivity() {
         binding = ActivityFlowBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btn.setOnClickListener {
-            lifecycleScope.launch {
-                //collect：相当于把水龙头接到水管上并打开 Observable.subscribe
-                mainViewModel.timeFlow.collect { time ->
-                    binding.tvTime.text = time.toString()
-                }
+            //launchWhenStarted函数就是用于保证只有在Activity处于Started状态的情况下
+//            lifecycleScope.launchWhenStarted {
+//                //collect：相当于把水龙头接到水管上并打开 Observable.subscribe
+//                mainViewModel.timeFlow.collect { time ->
+//                    binding.tvTime.text = time.toString()
+//                    Log.e("FlowTest", "Update time $time in UI.")
+//                }
+
+//            lifecycleScope.launch {
+//                repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                    mainViewModel.timeFlow.collect { time ->
+//                        binding.tvTime.text = time.toString()
+//                        Log.e("FlowTest", "Update time $time in UI.")
+//                    }
+//                }
+//            }
 
 //                mainViewModel.timeFlow.collectLatest { time ->
 //                    binding.tvTime.text = time.toString()
 //                    delay(3000)
 //                }
-            }
+
+//            mainViewModel.startTime()
         }
 
+        lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    mainViewModel.timeFlow.collect { time ->
+                        binding.tvTime.text = time.toString()
+                        Log.e("FlowTest", "Update time $time in UI.")
+                    }
+                }
+            }
     }
 }

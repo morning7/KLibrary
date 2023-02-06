@@ -1,7 +1,9 @@
 package com.karson.flow
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.flow
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.*
+import java.util.*
 
 /**
  * 数据源
@@ -19,4 +21,20 @@ class MainViewModel : ViewModel() {
             time++
         }
     }
+
+//    val stateFlow = timeFlow.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
+
+//    private var _timeFlow = MutableStateFlow(0)
+//
+//    val timeFlow = _timeFlow.asStateFlow()
+//
+//    fun startTime() {
+//        val time = Timer()
+//        time.scheduleAtFixedRate(object : TimerTask() {
+//            override fun run() {
+//                _timeFlow.value +=  1
+//            }
+//        }, 0, 1000)
+//    }
+
 }
