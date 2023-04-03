@@ -6,6 +6,7 @@
 
     <Button
         android:id="@+id/btn"
+        android:visibility="gone"
         android:text="Android调用Js"
         android:textAllCaps="false"
         android:layout_width="wrap_content"

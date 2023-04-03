@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.karson.webview.databinding.ActivityWebviewBinding
 
-class WebViewActivity : AppCompatActivity() {
+abstract class WebViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWebviewBinding
 
     companion object {
@@ -39,8 +39,11 @@ class WebViewActivity : AppCompatActivity() {
         setting.javaScriptEnabled = true
         androidCallJs()
         jsCallAndroid()
-        binding.webView.loadUrl(FILE_TEST)
+//        loadUrl(FILE_TEST)
+        binding.webView.loadUrl(getUrl())
     }
+
+    abstract fun getUrl(): String
 
     private fun jsCallAndroid() {
         /**
