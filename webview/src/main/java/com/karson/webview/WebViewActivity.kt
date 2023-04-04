@@ -29,6 +29,7 @@ abstract class WebViewActivity : AppCompatActivity() {
         binding = ActivityWebviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initWebView()
+        initListener()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -41,6 +42,13 @@ abstract class WebViewActivity : AppCompatActivity() {
         jsCallAndroid()
 //        loadUrl(FILE_TEST)
         binding.webView.loadUrl(getUrl())
+    }
+
+    private fun initListener() {
+        binding.refresh.setOnRefreshListener {
+            binding.refresh.finishRefresh()
+            binding.webView.loadUrl(getUrl())
+        }
     }
 
     abstract fun getUrl(): String
