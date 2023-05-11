@@ -7,6 +7,8 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <!--运行java main方法 不让gradle接管构建任务，防止当作gradle的task来执行-->
+        <option name="delegatedBuild" value="false" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
