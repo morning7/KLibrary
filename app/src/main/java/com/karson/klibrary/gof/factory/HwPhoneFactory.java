@@ -1,4 +1,4 @@
-package com.karson.klibrary.factory.factory;
+package com.karson.klibrary.gof.factory;
 
 import com.karson.klibrary.factory.bean.HwPhone;
 import com.karson.klibrary.factory.bean.Phone;

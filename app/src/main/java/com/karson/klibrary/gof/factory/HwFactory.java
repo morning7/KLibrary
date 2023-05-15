@@ -1,23 +1,23 @@
-package com.karson.klibrary.factory.factory;
+package com.karson.klibrary.gof.factory;
 
 import com.karson.klibrary.factory.listener.ICarFactory;
 import com.karson.klibrary.factory.listener.IComputerFactory;
 import com.karson.klibrary.factory.listener.IFactory;
 import com.karson.klibrary.factory.listener.IPhoneFactory;
 
-public class XmFactory implements IFactory {
+public class HwFactory implements IFactory {
     @Override
     public IComputerFactory createComputerFactory() {
-        return new XmComputerFactory();
+        return new HwComputerFactory();
     }
 
     @Override
     public IPhoneFactory createPhoneFactory() {
-        return new XmPhoneFactory();
+        return new HwPhoneFactory();
     }
 
     @Override
     public ICarFactory createCarFactory() {
-        return new XmCarFactory();
+        return new HwCarFactory();
     }
 }

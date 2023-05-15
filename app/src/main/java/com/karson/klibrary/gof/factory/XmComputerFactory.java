@@ -1,4 +1,4 @@
-package com.karson.klibrary.factory.factory;
+package com.karson.klibrary.gof.factory;
 
 import com.karson.klibrary.factory.listener.IComputerFactory;
 import com.karson.klibrary.factory.bean.Computer;
