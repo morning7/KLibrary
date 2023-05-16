@@ -1,8 +1,8 @@
-package com.karson.klibrary.factory;
+package com.karson.klibrary.gof.factory;
 
-import com.karson.klibrary.factory.bean.Computer;
-import com.karson.klibrary.factory.bean.HwComputer;
-import com.karson.klibrary.factory.bean.XmComputer;
+import com.karson.klibrary.gof.factory.bean.Computer;
+import com.karson.klibrary.gof.factory.bean.HwComputer;
+import com.karson.klibrary.gof.factory.bean.XmComputer;
 
 public class SimpleFactory {
 

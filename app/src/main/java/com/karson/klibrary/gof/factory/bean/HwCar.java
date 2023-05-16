@@ -1,4 +1,4 @@
-package com.karson.klibrary.factory.bean;
+package com.karson.klibrary.gof.factory.bean;
 
 public class HwCar extends Car {
     @Override

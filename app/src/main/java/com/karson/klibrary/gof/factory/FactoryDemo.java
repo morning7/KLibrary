@@ -1,10 +1,6 @@
-package com.karson.klibrary.factory;
+package com.karson.klibrary.gof.factory;
 
-import com.karson.klibrary.gof.factory.HwComputerFactory;
-import com.karson.klibrary.gof.factory.HwFactory;
-import com.karson.klibrary.gof.factory.XmComputerFactory;
-import com.karson.klibrary.gof.factory.XmFactory;
-import com.karson.klibrary.factory.listener.IFactory;
+import com.karson.klibrary.gof.factory.listener.IFactory;
 
 public class FactoryDemo {
 

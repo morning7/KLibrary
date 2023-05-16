@@ -1,5 +1,8 @@
-package com.karson.klibrary.decorator;
+package com.karson.klibrary.gof.decorator;
 
+/**
+ * 装饰模式
+ */
 public class Client {
     public static void main(String[] args) {
 //        Showable showable = new Decorator(new Girl());

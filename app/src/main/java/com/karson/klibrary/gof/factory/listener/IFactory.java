@@ -1,4 +1,4 @@
-package com.karson.klibrary.factory.listener;
+package com.karson.klibrary.gof.factory.listener;
 
 public interface IFactory {
 

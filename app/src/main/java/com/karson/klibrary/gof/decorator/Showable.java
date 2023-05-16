@@ -1,4 +1,4 @@
-package com.karson.klibrary.decorator;
+package com.karson.klibrary.gof.decorator;
 
 public interface Showable {
 
